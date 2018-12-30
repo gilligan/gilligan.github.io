@@ -11,7 +11,7 @@ in stdenv.mkDerivation {
   name = "tblog";
   buildInputs = [ env ];
   shellHook = ''
-      #jekyll serve --watch --future
-      #exit 0
+      jekyll serve --watch --future
+      exit 0
   '';
 }
