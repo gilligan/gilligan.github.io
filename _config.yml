@@ -1,0 +1,11 @@
+baseurl:
+
+description: "I'm a Germany based Software Developer blogging about things that I like - EOM."
+
+permalink: pretty
+
+tagline: "Haskell, Nix And Other Things"
+
+title: "tblog"
+
+url: "http://tblog.github.io"
