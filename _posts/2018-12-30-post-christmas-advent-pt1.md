@@ -89,7 +89,7 @@ goes right to left):
 - `lines :: String -> [String]`: the numbers in the input data file are `\n` separated to lets split it up
 - `foldMap :: (Foldable t, Monoid m) => (a -> m) -> t a -> m`: We fold over our list of strings (`t a`) using
 `(Sum . toNum)` (`a -> m` function), and get back `Sum Integer` (`m`).
-- `getSum`: unwraps our Integer from the Sum
+- `getSum`: unwraps our Integer from the Sum.
 
 
 #### Solution To Part 1
@@ -122,3 +122,103 @@ Day1> solvePart1 "./day1.input"
 ```
 
 ### Day 1 / Part 2
+
+The second part of the challenge is about finding the first value that occurs twice
+when continuously adding up values from the input stream (starting over from the
+beginning of the list if we reach the end before finding the first repeated value):
+
+```
+<sequence> → <steps> -> <result>
+
++1, -1             → [0 , 1, 0]                          → 0
++3, +3, +4, -2, -4 → [0, 3, 6, 10, 8, 4, 7, 10]          → 10
+-6, +3, +8, +5, -6 → [0,-6,-3,5,10,4,-2,1,9,14,8,2,5]    → 5
++7, +7, -2, -7, -4 → [0,7,14,12,5,1,8,15,13,6,2,9,16,14] → 14
+```
+
+So let's think about this for a moment:
+
+- Obviously we want to read the file contents and convert number strings using `toNum` again.
+- We have to work on a repeated sequence of the input since we don't know how soon the repetition will occur (→ [repeat](http://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#v:repeat)).
+- We need to operate on all intermediate results of adding up values from the input (→ [scanl](http://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#v:scanl)).
+- Going through the data we need to keep track of whether or not a value has already occurred (→ [Set](http://hackage.haskell.org/package/containers-0.6.0.1/docs/Data-Set.html) from the `containers` package). 
+
+#### Constructing The Input Sequence
+
+Given the same input data we want to obtain a sequence that contains all intermediate
+addition results:
+
+```Haskell
+buildSequence :: String -> [Integer]
+buildSequence = scanl (+) 0
+           . join
+           . repeat
+           . (fmap toNum)
+           . lines
+```
+
+Again we are only composing functions to reach our goal:
+
+- `lines :: String -> [String]`: split the `\n` separated string. 
+- `(fmap toNum) :: [String] -> [Integer]`: Turn the strings into numbers.
+- `repeat :: [Integer] -> [[Integer]]`: Create an infinite repetition of the list.
+- `join :: [[Integer]] -> [Integer]`: Collapse the list of lists to a list.
+- `scanl (+) 0 :: [Integer] -> [Integer]`: Fold the list using addition while keeping all successive reduced values.
+
+We now have an *infinite* list that contains the intermediate results of adding up cycles of
+the input data into all eternity. We can use this to find the first value that occurs twice.
+
+
+#### Looking For Repetition
+
+As mentioned before we are going to use a `Set` to keep track of values that have
+already occurred while going through our list. When a value is not already in the Set
+we add the value to the Set and carry on with the remainder of the list. If the value is in our Set we have found the first repetition and are done:
+
+```Haskell
+findRep :: String -> Maybe Integer
+findRep xs = go (buildSequence xs) (Set.fromList [])
+    where
+        go :: [Integer] -> Set.Set Integer -> Maybe Integer
+        go [] _     = Nothing
+        go (x:xs) s = if x `Set.member` s 
+                         then (Just x) 
+                         else go xs (Set.insert x s)
+```
+
+### Solution To Part 2
+
+All in all we can add the following code to our existing module to solve the
+second part of this challenge:
+
+```Haskell
+import Control.Monad (join)
+import qualified Data.Set as Set
+
+buildSequence :: String -> [Integer]
+buildSequence = scanl (+) 0
+           . join
+           . repeat
+           . (fmap toNum)
+           . lines
+
+findRep :: String -> Maybe Integer
+findRep xs = go (buildSequence xs) (Set.fromList [])
+    where
+        go :: [Integer] -> Set.Set Integer -> Maybe Integer
+        go [] _     = Nothing
+        go (x:xs) s = if x `Set.member` s 
+                         then Just x 
+                         else go xs (Set.insert x s)
+```
+
+## That's All Folks!
+
+This concludes my first post on this blog and in this series. My hope
+is that it might be useful for people who are new to Haskell and are
+looking for more than just a GitHub repository containing solutions. That
+being said there are a lot of great Haskell developers out there who
+published all of their solutions so don't hesitate to look at them and
+learn from them.
+
+_PS: The repository containing all the code is [here](https://github.com/gilligan/aoc2018)._
