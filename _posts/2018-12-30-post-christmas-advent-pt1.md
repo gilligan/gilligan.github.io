@@ -9,12 +9,13 @@ coding challenge series. In case you haven't heard about it, here is an excerpt 
 
 > Advent of Code is an Advent calendar of small programming puzzles for a variety of skill sets and skill levels that can be solved in any programming language you like. People use them as a speed contest, interview prep, company training, university coursework, practice problems, or to challenge each other.
 
-It began with nice little tasks that I could solve with little effort. After some days however the challenges got
+It began with nice little tasks that I could solve with relatively little effort. After some days however the challenges got
 more and more involved and i was unable to find the time to work on them. Each day there is a new challenge so the
-unsolved ones started to pile up which I found somewhat demotivating.
+unsolved ones started to pile up which I found a bit demotivating.
 
-Now that _Advent of Code 2018_ is over I decided to pick up the challenges again and blog about solving them in Haskell.
-Maybe some people will get something out of it - Actually, if you do then let [me know](https://twitter.com/tpflug) :)
+Now that _Advent Of Code 2018_ is over I decided to return to the challenges but instead
+of just solving them I will try to also explain _how_ I am solving them in Haskell. Hopefully
+some people will find this useful.
 
 ### A Short Note On Nix
 
@@ -50,7 +51,7 @@ with reading in the input.
 #### Reading the input
 
 Reading the input data is of course just a matter of calling [readFile](http://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#v:readFile).
-Unfortunately all the numbers are prefixed with either `-` or `+`. If we want to use [read](http://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#v:read) to parse the strings as numbers then this won't work:
+Unfortunately all the numbers are prefixed with either `-` or `+`. If we want to use [read](http://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#v:read) we'll get into trouble:
 
 ```
 Prelude> read "3" :: Integer
@@ -61,7 +62,7 @@ Prelude> read "+3" :: Integer
 *** Exception: Prelude.read: no parse
 ```
 
-We need to skip the `+` signs. We can just peek at the start of the string check if it is
+We need to skip the `+` signs. We can just peek at the start of the string to check if it is
 a `+` or not and then act accordingly:
 
 ```Haskell
@@ -86,10 +87,10 @@ calibrate = getSum
 This is a neat little composition. Let's go over it step by step (starting at the end because composition
 goes right to left):
 
-- `lines :: String -> [String]`: the numbers in the input data file are `\n` separated to lets split it up
+- `lines :: String -> [String]`: the numbers in the input data file are `\n` separated to lets split them up
 - `foldMap :: (Foldable t, Monoid m) => (a -> m) -> t a -> m`: We fold over our list of strings (`t a`) using
-`(Sum . toNum)` (`a -> m` function), and get back `Sum Integer` (`m`).
-- `getSum`: unwraps our Integer from the Sum.
+`(Sum . toNum)` (`a -> m`), and get back `Sum Integer` (`m`).
+- `getSum :: Sum a -> a`: unwraps our Integer from the Sum.
 
 
 #### Solution To Part 1
@@ -124,11 +125,12 @@ Day1> solvePart1 "./day1.input"
 ### Day 1 / Part 2
 
 The second part of the challenge is about finding the first value that occurs twice
-when continuously adding up values from the input stream (starting over from the
-beginning of the list if we reach the end before finding the first repeated value):
+when continuously adding up values from the input stream. If we reach the end of the
+input before finding a repetition we have to wrap around and continue from the start
+of the list:
 
 ```
-<sequence> → <steps> -> <result>
+<input>            → <steps>                             → <result>
 
 +1, -1             → [0 , 1, 0]                          → 0
 +3, +3, +4, -2, -4 → [0, 3, 6, 10, 8, 4, 7, 10]          → 10
@@ -212,12 +214,18 @@ findRep xs = go (buildSequence xs) (Set.fromList [])
                          else go xs (Set.insert x s)
 ```
 
+Thanks to lazy evaluation we can just operate on the infinite list
+that we create in `buildSequence`. The manual recursion in `findRep`
+determines how much of the list needs to be evaluated -- which is
+as many elements as it takes to hit the first repetition.
+
 ## That's All Folks!
 
-This concludes my first post on this blog and in this series. My hope
-is that it might be useful for people who are new to Haskell and are
-looking for more than just a GitHub repository containing solutions. That
-being said there are a lot of great Haskell developers out there who
+This concludes my first post on this blog and in this series. I hope
+it might be useful for people who are new to Haskell and are
+looking for more than just a GitHub repository containing solutions.
+
+That being said there are a lot of great Haskell developers out there who
 published all of their solutions so don't hesitate to look at them and
 learn from them.
 
