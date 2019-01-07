@@ -65,7 +65,7 @@ Prelude> read "+3" :: Integer
 We need to skip the `+` signs. We can just peek at the start of the string to check if it is
 a `+` or not and then act accordingly:
 
-```Haskell
+```haskell
 toNum :: String -> Integer
 toNum str@(s:ss) = if s == '+' then read ss else read str
 ```
@@ -77,7 +77,7 @@ perform the actual calculation. All we really need to do is to sum up all the nu
 For this we can use a combination of [foldMap](http://hackage.haskell.org/package/base-4.12.0.0/docs/Data-Foldable.html#v:foldMap)
 and [Sum](http://hackage.haskell.org/package/base-4.12.0.0/docs/Data-Monoid.html#v:Sum):
 
-```Haskell
+```haskell
 calibrate :: String -> Integer
 calibrate = getSum
           . foldMap (Sum . toNum)
@@ -98,7 +98,7 @@ goes right to left):
 Putting it all together we can write a module like the following:
 
 
-```Haskell
+```haskell
 module Day1 where
 
 import Data.Monoid
@@ -150,7 +150,7 @@ So let's think about this for a moment:
 Given the same input data we want to obtain a sequence that contains all intermediate
 addition results:
 
-```Haskell
+```haskell
 buildSequence :: String -> [Integer]
 buildSequence = scanl (+) 0
            . join
@@ -177,7 +177,7 @@ As mentioned before we are going to use a `Set` to keep track of values that hav
 already occurred while going through our list. When a value is not already in the Set
 we add the value to the Set and carry on with the remainder of the list. If the value is in our Set we have found the first repetition and are done:
 
-```Haskell
+```haskell
 findRep :: String -> Maybe Integer
 findRep xs = go (buildSequence xs) (Set.fromList [])
     where
@@ -193,7 +193,7 @@ findRep xs = go (buildSequence xs) (Set.fromList [])
 All in all we can add the following code to our existing module to solve the
 second part of this challenge:
 
-```Haskell
+```haskell
 import Control.Monad (join)
 import qualified Data.Set as Set
 
