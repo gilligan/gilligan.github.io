@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Post-Christmas Advent of Code In Haskell"
+title: "Post-Christmas Advent of Code In Haskell - Day 1"
 description: "Solving Advent of Code with Haskell - slowly."
 ---
 

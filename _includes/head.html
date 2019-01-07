@@ -26,6 +26,17 @@
     <script src="{{ page.custom_js }}"></script>
   {% endif %}
 
+  {% if page.layout == "post" %}
+  <!-- Twitter Card data -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:site" content="@tpflug">
+  <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% endif %}">
+  <meta name="twitter:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 200 }}{% else %}{{ site.description }}{% endif %}">
+  <meta name="twitter:creator" content="@tpflug">
+  <!-- Twitter summary card with large image must be at least 280x150px -->
+  <!--<meta name="twitter:image:src" content="{{ "/img/" | append: page.feature_image | prepend: site.baseurl | prepend: site.url }}">-->
+  {% endif %}
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 
