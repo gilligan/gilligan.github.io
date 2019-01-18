@@ -5,9 +5,8 @@ description: "Haskelling our way through the puzzles of Day 2"
 ---
 
 Today's post is about [Day 2: _"Inventory Management System"_](https://adventofcode.com/2018/day/2)
-. We are given an file containing random looking Strings
-and are asked to calculate some checksums and also find a pair fulfilling a certain
-property.
+. We are given a file containing random looking strings
+and are asked to calculate some checksums and also find a certain pair among them..
 
 ### Day 2 / Part 1
 
@@ -46,10 +45,12 @@ not the String fulfills either or both of those properties..
 getOccurrences :: String -> (Bool, Bool)
 ```
 Admittedly `(Bool, Bool)` is a type you should usually be avoiding since it is entirely
-meaningless when it appears outside of context. Luckily we aren't writing production code
-today so I am just going to pretend this never happened and carry on. We will assume the
-first value refers to letters appearing twice, and the second one to letters appearing
-three times.
+meaningless when it appears without context. Luckily we aren't writing production code
+today so I am just going to pretend this never happened and carry on.
+
+We will assume the
+first value refers to letters appearing twice (`True` --> appearing twice), and the second 
+one to letters appearing three times (`True` --> appearing three times).
 
 How do we go about finding out if a string has any re-occurring characters? We can use
 some handy functions from `Data.List`, namely
@@ -143,8 +144,8 @@ getOccurrences = bimap (not . null) (not . null)
                . sort
 ```
 
-Now that we can work on single strings we just have to write a function that applies
-`getOccurrences` to all IDs, sums up and finally multiplies the values.
+Now we just have to write a function that applies `getOccurrences` to all IDs, sums up,
+and finally multiplies the values.
 
 
 #### calcChecksum
@@ -182,7 +183,7 @@ ghc is going to report back:
                the inferred type of it :: (Num a, Num b) => (a, b)
 ```
 
-Alright, we can do that:
+Alright, we can write something fulfilling that signature:
 
 ```haskell
 toNum x = if x then 1 else 0
@@ -196,7 +197,7 @@ Let's try it:
 (3,0)
 ```
 
-So we can add that to what we worked out before:
+Let's add it to what we already have:
 
 ```haskell
 f :: String -> (Int, Int)
@@ -205,9 +206,9 @@ f = foldr sumUp (0,0)
   . lines
 ```
 
-Almost there! The only part missing is that we need to multiply the first and second value
-of the tuple still. We cannot just put multiplication in front of our composition because
-`(*)` expects 2 arguments whereas we have a tuple. The answer to that is `uncurry`:
+Almost there! The only part missing is that we still need to multiply the first and second
+value of the tuple. We cannot just put multiplication in front of our composition because
+`(*)` expects 2 arguments where we just have a tuple. The answer to that is `uncurry`:
 
 ```
 > :t (*)
@@ -230,8 +231,7 @@ calcChecksum = uncurry (*)
 
 ##### Putting The Pieces Together
 
-The only thing we haven't looked at is the boring part of actually reading the file. Here
-is the complete code for solving part 1 of this challenge:
+Here is the complete code for solving part 1 of this challenge:
 
 ```haskell
 ofLength n = filter ((==n) . length)
@@ -255,3 +255,100 @@ calcChecksum = uncurry (*)
 solvePart1 :: FilePath -> IO Int
 solvePart1 file = calcChecksum <$> readFile file
 ```
+
+
+### Day 2 / Part 2
+
+The second part continues with the same input data. We are tasked with finding a pair of
+IDs differing in only 1 character. The result is said string with the differing character
+removed.
+
+Let's again start in the small and work our way up to the bigger picture. We are going to
+need a function to determine the distance between two strings - the number of differing
+characters between two strings:
+
+```haskell
+strDist :: String -> String -> Int
+strDist [] _ = 0
+strDist (x:xs) (y:ys) = if x == y then strDist xs ys else 1 + strDist xs ys
+```
+
+Let's also quickly implement the function that we'll need once we have
+our pair which drops the differing character:
+
+```haskell
+dropEq :: String -> String -> String
+dropEq [] _ = []
+dropEq (x:xs) (y:ys) = if x == y then x : dropEq xs ys else dropEq xs ys
+```
+
+Another simple, manual recursion. Now we need to start thinking about how we actually want
+to find our pair in the first place.
+The pair we are looking for could be between any two strings of our input. Thus let's
+build a list of tuples representing all combinations. Haskell
+[list comprehension](https://wiki.haskell.org/List_comprehension) comes in handy here:
+
+```haskell
+getCombinations :: [a] -> [(a, a)]
+getCombinations xs = [(x,y) | x <- xs, y <- xs]
+```
+
+When fed with all IDs from the input file, the pair we are looking for is going to be
+one of the tuples in that list. We can find it by looking for the tuple where `strDist`
+yields `1`. Let's put together what we have so far:
+
+```haskell
+findPair :: String -> Maybe (String, String)
+findPair = find ((==1) . uncurry strDist)
+         . getCombinations
+         . lines
+```
+
+With that we can already find the tuple we are looking for! We only need to add one last
+transformation - we want a single string with the differing character omitted. We have
+already written `dropEq :: String -> String -> String` for that purpose. Note that we want
+to apply `dropEq` to two strings in a tuple so yet again we reach for 
+[uncurry](http://hackage.haskell.org/package/base-4.12.0.0/docs/Prelude.html#v:uncurry).
+
+```haskell
+findPair :: String -> Maybe (String, String)
+findPair = fmap (uncurry dropEq)
+         . find ((==1) . uncurry strDist)
+         . getCombinations
+         . lines
+```
+
+Note how we need to use `fmap` as the tuple is wrapped in a `Maybe`
+
+##### Putting The Pieces Together
+
+Below is the full code for solving the second part of this challenge:
+
+```haskell
+getCombinations :: [b] -> [(b, b)]
+getCombinations xs = [(x,y) | x <- xs, y <- xs]
+
+dropEq :: String -> String -> String
+dropEq [] _ = []
+dropEq (x:xs) (y:ys) = if x == y then x : dropEq xs ys else dropEq xs ys
+
+strDist :: String -> String -> Int
+strDist [] _ = 0
+strDist (x:xs) (y:ys) = if x == y then strDist xs ys else 1 + strDist xs ys
+
+findPair :: String -> Maybe String 
+findPair = fmap (uncurry dropEq)
+         . find ((==1) . uncurry strDist)
+         . getCombinations
+         . lines
+
+solvePart2 :: FilePath -> IO (Maybe String)
+solvePart2 file = findPair <$> readFile file
+```
+
+
+### That's All Folks
+
+That's it for Day 2. You can find the full code on
+[github](https://github.com/gilligan/aoc2018). If you have any feedback please don't
+hesitate to reach out: [@tpflug](https://twitter.com/tpflug).
