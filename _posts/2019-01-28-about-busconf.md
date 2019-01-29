@@ -6,7 +6,7 @@ description: "BusConf: A non-profit community get-together for people interested
 
 ![busconf](/images/busconf.jpg)
 
-For the past 2 years I've been organizing [BusConf](www.bus-conf.org) - an 
+For the past 2 years I've been organizing [BusConf](https://www.bus-conf.org) - an 
 [Open Space](https://en.wikipedia.org/wiki/Open_Space_Technology) un-conference taking place in
 Germany on the first weekend of August. This year will be the third time -- Just today I announced
 that you can register your interest for attending (see link on the website).
