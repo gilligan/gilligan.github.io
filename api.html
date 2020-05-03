@@ -1,0 +1,30 @@
+<!doctype html> <!-- Important: must specify -->
+<html>
+<head>
+  <meta charset="utf-8"> <!-- Important: rapi-doc uses utf8 charecters -->
+  <script type="module" src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"></script>
+
+</head>
+<body>
+  <rapi-doc
+      spec-url="https://raw.githubusercontent.com/gilligan/hydra/swagger-config/hydra.yaml";
+      render-style = "read"
+      show-header = "false"
+      header-color="#2d87e2"
+      bg-color="#f9f9fa"
+      text-color=""
+      nav-bg-color="#3f4d67"
+      nav-text-color="#a9b7d0"
+      nav-hover-bg-color="#333f54"
+      nav-hover-text-color="#fff"
+      nav-accent-color="#f44236"
+      primary-color="#5c7096"
+      theme="light"
+      render-style="read">
+      <img
+          slot="nav-logo"
+          src="https://nixos.org/logo/nix-wiki.png"
+          style="margin-left: 40px"/>
+  </rapi-doc>
+</body>
+</html>
