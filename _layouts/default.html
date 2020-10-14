@@ -1,53 +1,31 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-us">
 
   {% include head.html %}
 
-  <body>
+  <body class="theme-base-0e">
 
     {% include sidebar.html %}
 
     <!-- Wrap is the content to shift when toggling the sidebar. We wrap the
          content to avoid any CSS collisions with our real content. -->
     <div class="wrap">
-      <header class="masthead" role="banner">
+      <div class="masthead">
         <div class="container">
           <h3 class="masthead-title">
             <a href="{{ site.baseurl }}/" title="Home">{{ site.title }}</a>
             <small>{{ site.tagline }}</small>
           </h3>
         </div>
-      </header>
+      </div>
 
-      <main class="container content" role="main">
+      <div class="container content">
         {{ content }}
-      </main>
+      </div>
     </div>
 
-    <label for="sidebar-checkbox" class="sidebar-toggle">
-      <i class="fa fa-bars" aria-hidden="true"></i>
-      <span class="sr-only">Show menu</span>
-    </label>
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
 
-    <script>
-      (function(document) {
-        // Of course, this won't work without JS, but the menu can
-        // still be hidden with CSS.
-
-        var toggle = document.querySelector('.sidebar-toggle');
-        var sidebar = document.querySelector('#sidebar');
-        var checkbox = document.querySelector('#sidebar-checkbox');
-
-        document.addEventListener('click', function(e) {
-          var target = e.target;
-
-          if(!checkbox.checked ||
-             sidebar.contains(target) ||
-             (target === checkbox || target === toggle)) return;
-
-          checkbox.checked = false;
-        }, false);
-      })(document);
-    </script>
+    <script src='{{ site.baseurl }}/public/js/script.js'></script>
   </body>
 </html>

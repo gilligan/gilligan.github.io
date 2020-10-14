@@ -1,16 +1,8 @@
 <head>
-  <link href="http://gmpg.org/xfn/11" rel="profile" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-  <meta content="summary" name="twitter:card" />
-  <meta content="@tpflug" name="twitter:site" />
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
 
-  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1" />
-
-  {% if site.google_analytics and jekyll.environment == 'production' %}
-  {% include analytics.html %}
-  {% endif %}
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
 
   <title>
     {% if page.title == "Home" %}
@@ -20,41 +12,28 @@
     {% endif %}
   </title>
 
-  <link rel="stylesheet" href="/css/syntax.css" />
-  <link rel="stylesheet" href="/css/lanyon.css" />
-
-  {% if page.custom_css %}
-    <link rel="stylesheet" href="{{ page.custom_css }}" />
+  {% if page.url and site.baseurl %}
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
   {% endif %}
 
-  {% if page.custom_js %}
-    <script src="{{ page.custom_js }}"></script>
-  {% endif %}
+  <link rel="stylesheet" href="{{ '/public/css/poole.css' | absolute_url }}">
+  <link rel="stylesheet" href="{{ '/public/css/syntax.css' | absolute_url }}">
+  <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | absolute_url }}">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400">
 
-  {% if page.layout == "post" %}
-  <!-- Twitter Card data -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:site" content="@tpflug">
-  <meta name="twitter:title" content="{% if page.title %}{{ page.title }}{% endif %}">
-  <meta name="twitter:description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 200 }}{% else %}{{ site.description }}{% endif %}">
-  <meta name="twitter:creator" content="@tpflug">
-  <!-- Twitter summary card with large image must be at least 280x150px -->
-  <!--<meta name="twitter:image:src" content="{{ "/img/" | append: page.feature_image | prepend: site.baseurl | prepend: site.url }}">-->
-  {% endif %}
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ '/public/apple-touch-icon-precomposed.png' | absolute_url }}">
+  <link rel="shortcut icon" href="{{ '/public/favicon.ico' | absolute_url }}">
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700%7CPT+Sans:400" />
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="{{ '/atom.xml' | absolute_url }}">
 
-  <link rel="apple-touch-icon-precomposed" sizes="128x128" href="/images/favicon.png" />
-  <link rel="shortcut icon" type="image/png" href="/images/favicon.png" />
-  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
-
-  <script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Person",
-    "name": "Tobias Pflug",
-    "url": "http://www.tpflug.me",
-  }
+  {% if site.google_analytics_id %}
+  <script>
+    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+    ga('create', '{{ site.google_analytics_id }}', 'auto');
+    ga('send', 'pageview');
   </script>
+  {% endif %}
 </head>
