@@ -125,6 +125,16 @@
     };
     version = "1.5.0";
   };
+  jekyll-paginate = {
+    groups = ["default"];
+    platforms = [];
+    source = {
+      remotes = ["https://rubygems.org"];
+      sha256 = "0r7bcs8fq98zldih4787zk5i9w24nz5wa26m84ssja95n3sas2l8";
+      type = "gem";
+    };
+    version = "1.1.0";
+  };
   jekyll-sass-converter = {
     dependencies = ["sassc"];
     groups = ["default"];
