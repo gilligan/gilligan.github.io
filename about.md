@@ -1,6 +1,7 @@
 ---
 layout: page
 title: About
+description: Everything you may want to know about me
 ---
 Hey, my name is *Tobi*! Nice to meet you 👋
 

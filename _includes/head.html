@@ -16,6 +16,29 @@
   <link rel="canonical" href="{{ page.url | absolute_url }}">
   {% endif %}
 
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:site" content="@dgwolff">
+  <meta name="twitter:creator" content="@dgwolff">
+{% if page.title %}
+  <meta name="twitter:title" content="{{ page.title }}">
+{% else %}
+  <meta name="twitter:title" content="{{ site.title }}">
+{% endif %}
+{% if page.url %}
+  <meta name="twitter:url" content="{{ site.url }}{{ page.url }}">
+{% endif %}
+{% if page.description %}
+  <meta name="twitter:description" content="{{ page.description }}">
+{% else %}
+  <meta name="twitter:description" content="{{ site.description }}">
+{% endif %}
+{% if page.image %}
+  <meta name="twitter:image:src" content="{{ site.url }}/images/posts/{{ page.image }}">
+{% else % }
+  <meta name="twitter:image:src" content="{{ site.url }}/images/me.jpg">
+{% endif %}
+
   <link rel="stylesheet" href="{{ '/public/css/poole.css' | absolute_url }}">
   <link rel="stylesheet" href="{{ '/public/css/syntax.css' | absolute_url }}">
   <link rel="stylesheet" href="{{ '/public/css/lanyon.css' | absolute_url }}">
