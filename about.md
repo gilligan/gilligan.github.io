@@ -45,7 +45,6 @@ I care about in my professional work beyond just tools is:
 - Testing -- because strong static typing is _not_ good enough
 - Mentoring -- I am proud to have co-created and led the [HolidayCheck Apprenticeship Program](http://apprenticeship.holidaycheck.com/) and wish more companies would adopt similar approaches to mentoring and on-boarding.
 
-
 ## What Else?
 
 Some other things worth mentioning about myself
@@ -55,6 +54,7 @@ Some other things worth mentioning about myself
 - I occasionally speak at conferences ([haskellX 2019: Nix workshop](https://skillsmatter.com/skillscasts/14175-workshop-nix-and-haskell-from-hello-world-to-deploying-to-production))
 - I've helped out in the haskellX program committee which was a really nice experience
 - You can have a look at my [CV](https://tpflug.me/cv.pdf) if you want to
+- I believe blockchain is a bubble filled with toxic crypto nonsense and I don't want to be part of this.
 
 ## How To Reach Me
 
