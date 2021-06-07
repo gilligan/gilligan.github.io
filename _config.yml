@@ -2,7 +2,7 @@
 title:               tpflug
 tagline:             ' [tobi, human, engineer]'
 description:         "I'm a Germany based Software Engineer and Consultant who loves to work with people and solve problems"
-url:                 http://www.tpflug.me
+url:                 https://www.tpflug.me
 baseurl:
 paginate:            100
 permalink:           pretty
