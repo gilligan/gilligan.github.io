@@ -1,7 +1,7 @@
 ---
 layout: page
-title: About
-description: Everything you may want to know about me
+title: About Me
+description: Everything you may want to know about me, working with me, and what I can help you with
 ---
 Hey, my name is *Tobi*! Nice to meet you 👋
 
@@ -10,7 +10,7 @@ Hey, my name is *Tobi*! Nice to meet you 👋
 </p>
 
 I live in South Germany together with my wonderful family
-and for the past _14+_ years I have been working as an Software Engineer and Consultant in the IT industry.
+and for the past _14+_ years I have been working as a Software Engineer and Consultant in the IT industry.
 
 ## Tools & Technologies
 
@@ -58,6 +58,20 @@ Some other things worth mentioning about myself
 - I've helped out in the haskellX program committee which was a really nice experience.
 - You can have a look at my [CV](https://tpflug.me/cv.pdf) if you want to.
 - I believe blockchain is a bubble filled with toxic crypto nonsense and I don't want to be part of this.
+
+## What I can help you with
+
+If you want me to work with you I can help you in the following ways:
+
+- I can write code for you in various languages and also quickly learn new ones.
+- I can mentor Engineers and help you to bootstrap mentorship programs and improve onboarding experiences.
+- I can help you to foster a mindset around quality, testing and excellence in your feature teams.
+- I can help you to identify bottlenecks and shift them out of your Engineering teams.
+- I can organize events/(un-)conferences for your Engineering teams to boost knowledge-sharing and collaboration.
+- I can help you with figuring out what you are looking for in Engineers and how to interview and hire them.
+- I can run workshops on FP, Nix and other topics.
+
+Sounds interesting? Let's talk.
 
 ## How To Reach Me
 
