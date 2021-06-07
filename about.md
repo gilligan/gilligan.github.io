@@ -61,15 +61,15 @@ Some other things worth mentioning about myself
 
 ## What I can help you with
 
-If you want me to work with you I can help you in the following ways:
+There are several ways in which I can help you out. I can ..
 
-- I can write code for you in various languages and also quickly learn new ones.
-- I can mentor Engineers and help you to bootstrap mentorship programs and improve onboarding experiences.
-- I can help you to foster a mindset around quality, testing and excellence in your feature teams.
-- I can help you to identify bottlenecks and shift them out of your Engineering teams.
-- I can organize events/(un-)conferences for your Engineering teams to boost knowledge-sharing and collaboration.
-- I can help you with figuring out what you are looking for in Engineers and how to interview and hire them.
-- I can run workshops on FP, Nix and other topics.
+- write code for you in various languages and also quickly learn new ones.
+- mentor Engineers and help you to bootstrap mentorship programs and improve onboarding experiences.
+- help you to foster a mindset around quality, testing and excellence in your feature teams.
+- help you to identify bottlenecks and shift them out of your Engineering teams.
+- organize events/(un-)conferences for your Engineering teams to boost knowledge-sharing and collaboration.
+- help you to figure out what you are looking for in Engineers and how to interview them.
+- run workshops on FP, Nix and other topics.
 
 Sounds interesting? Let's talk.
 
