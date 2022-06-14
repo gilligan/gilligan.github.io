@@ -14,7 +14,8 @@ and for the past _14+_ years I have been working as a Software Engineer, Consult
 
 ## Working With People, Teams And Individuals
 
-My main interest is to work with people, both individually and on a team level to help identify problems, support with the solutions and macreate value in a sustainable manner in a psychologically safe environment. I strive to be a [servant leader](https://en.wikipedia.org/wiki/Servant_leadership), I don't crack the whip to get teams to perform, instead I work to create alignment and shared understanding around value and performance in the context of a team's remit.
+My main interest is to work with people, both individually and on a team level to help identify problems, support with the solutions and to create value in a sustainable manner in a psychologically safe environment.
+I strive to be a [servant leader](https://en.wikipedia.org/wiki/Servant_leadership) and instead of cracking the whip to "make teams peform", I create alignment and shared understanding around value and performance in the context of a team's remit to help them deliver.
 
 - **Agile**: I believe in [_"individuals and interactions over processes and tools"_](https://agilemanifesto.org/) and apply this in my work.
 - **Hiring**: I have gathered a lot of experience as Hiring Manager in different companies and care deeply about creating and conducting hiring processes and interviews that are actually effective by being fair, transparent and inclusive.
@@ -53,6 +54,7 @@ Some other things worth mentioning about myself
 - I am the organizer of [BusConf](https://www.bus-conf.org) - A FP oriented OpenSpace conference.
 - I occasionally speak at conferences ([haskellX 2019: Nix workshop](https://skillsmatter.com/skillscasts/14175-workshop-nix-and-haskell-from-hello-world-to-deploying-to-production)).
 - I've helped out in the haskellX program committee which was a really nice experience.
+- Currently working towards my running my first marathon
 - You can have a look at my [CV](https://tpflug.me/cv.pdf) if you want to.
 
 ## How To Reach Me
